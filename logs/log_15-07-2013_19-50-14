@@ -1,0 +1,11 @@
+Fecha y Hora: 15-07-2013 19:50
+ 
+[RUNNING] 
+ Tipo de servicio: tcp
+ Ip: 127.0.0.1
+ Puerto: 80
+ Estado: Running 
+[RUNNING] 
+ Tipo de servicio: http
+ Url: http://google.com
+ Estado: Running 
