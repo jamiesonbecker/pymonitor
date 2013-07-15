@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from console_color_syntax import ConsoleColorSyntax
 from sys import argv
 
@@ -12,7 +13,9 @@ class ErrorHandler:
             % argv[0] ,
         'cod-003': ' No hay servicios para monitorizar, configurelos',
         'cod-004': 'Imposible mostrar la ayuda, intente nuevamente '+ \
-                    'y asegurese que el archivo \'docs/help\' exista'
+                    'y asegurese que el archivo \'docs/help\' exista',
+        'cod-005': 'Error al guardar el archivo de log, asegurese que '+\
+		    'el directorio "/logs" exista'
     }
     sCodNotFound=' El codigo de error \'%s\' no se encuentra parametrizado'+\
                     ', consulte al administrador del sistema'
