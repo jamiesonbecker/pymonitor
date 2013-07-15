@@ -5,16 +5,16 @@ from helpers import Helpers
 
 class Services:
 
-    bDebug = False
     oHelpers = ""
     servicesChecksFunc = {}
     listDebugResultOk = []
     listDebugResultError = []
+    listTextResultOk = []
+    listTextResultError = []
     sErrorFlag = 'error'
 
-    def __init__(self, debug):
+    def __init__(self):
         """	Constructor """
-        self.bDebug = debug
         self.oHelpers = Helpers()
         self.servicesChecksFunc = {'tcp': self.checkTcpService, \
             'http': self.checkHttpService, \
@@ -36,9 +36,9 @@ class Services:
             #if isinstance(sock, SocketTest):
             sock.connect((sIp, nPort))
             sock.close
-            self.saveDebugResult(info)
+            self.saveExecuteResult(info)
         except Exception as e:
-            self.saveDebugResult(info, self.sErrorFlag, e)
+            self.saveExecuteResult(info, self.sErrorFlag, e)
 
 
     def checkHttpService(self, info):
@@ -46,21 +46,23 @@ class Services:
         sUrl = self.oHelpers.formatToValidUrl(info[2])
         try:
             urlopen(sUrl, None, 5).read()
-            self.saveDebugResult(info)
+            self.saveExecuteResult(info)
         except Exception as e:
-            self.saveDebugResult(info, self.sErrorFlag, e)
+            self.saveExecuteResult(info, self.sErrorFlag, e)
 
 
     def checkFtpService(self, info):
         print 'TODO'
 
 
-    def saveDebugResult(self, info, status="ok", error=""):
-        """ Save in diferents list the debug results, Error List and Ok List """
-        if self.bDebug == True:
-            result = self.oHelpers.printOutput(info, status, error)
-            if status == 'ok':
-                self.listDebugResultOk.append(result)
-            elif status == self.sErrorFlag:
-                self.listDebugResultError.append(result)
+    def saveExecuteResult(self, info, status="ok", error=""):
+        """ Save in diferents list results, Error List and Ok List """
+        sResultDebug = self.oHelpers.printOutput(info, status, error)
+        sResultText = self.oHelpers.printOutput(info, status, error, 'text')
+        if status == 'ok':
+	  self.listDebugResultOk.append(sResultDebug)
+	  self.listTextResultOk.append(sResultText)
+        elif status == self.sErrorFlag:
+	  self.listDebugResultError.append(sResultDebug)
+	  self.listTextResultError.append(sResultText)
         
