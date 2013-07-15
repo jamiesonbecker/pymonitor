@@ -29,7 +29,7 @@ if len(argv) > 0:
             exit()
     
         if o == '-l':
-            print ''
+            oMain.bLog = True
     
         # debug mode?
         if o == '-d':
