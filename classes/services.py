@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from socket import socket
-from urllib2 import urlopen
+from urllib2 import urlopen, HTTPError, URLError
+from ftplib import FTP
 from helpers import Helpers
 
 class Services:
@@ -47,12 +48,24 @@ class Services:
         try:
             urlopen(sUrl, None, 5).read()
             self.saveExecuteResult(info)
-        except Exception as e:
-            self.saveExecuteResult(info, self.sErrorFlag, e)
+        except (HTTPError, URLError) as e:   
+	    self.saveExecuteResult(info, self.sErrorFlag, e)
 
 
     def checkFtpService(self, info):
-        print 'TODO'
+      """ Check FTP services """
+        sServer=info[2]
+        sPort=info[3]
+        sUser=info[4]
+        sPassw=info[5]
+        try:
+	  ftp=FTP()
+	  ftp.connect(sServer, sPort)
+	  ftp.login(sUser, sPassw)
+	  ftp.quit()
+	  self.saveExecuteResult(info)
+	except Exception as e:
+	  self.saveExecuteResult(info, self.sErrorFlag, e)
 
 
     def saveExecuteResult(self, info, status="ok", error=""):
