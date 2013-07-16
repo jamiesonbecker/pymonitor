@@ -20,6 +20,11 @@ class Helpers:
 		 " Puerto: "+str(info[3])+"\r\n"
     elif sServiceType=='http':
       sBody +=" Url: "+self.formatToValidUrl(info[2])+"\r\n"
+    elif sServiceType=='ftp':
+      sBody +=" Ip: "+info[2]+"\r\n"+ \
+	      " Puerto: "+str(info[3])+"\r\n"
+      sBody +=" Usuario: "+info[4]+"\r\n"
+      sBody +=" Password: "+info[5]+"\r\n"
 	
     if status == "ok":
       if outputype=='console':
