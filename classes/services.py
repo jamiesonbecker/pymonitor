@@ -49,23 +49,23 @@ class Services:
             urlopen(sUrl, None, 5).read()
             self.saveExecuteResult(info)
         except (HTTPError, URLError) as e:   
-	    self.saveExecuteResult(info, self.sErrorFlag, e)
+            self.saveExecuteResult(info, self.sErrorFlag, e)
 
 
     def checkFtpService(self, info):
-      """ Check FTP services """
-        sServer=info[2]
-        sPort=info[3]
-        sUser=info[4]
-        sPassw=info[5]
+        """ Check FTP services """
+        sServer = info[2]
+        sPort = info[3]
+        sUser = info[4]
+        sPassw = info[5]
         try:
-	  ftp=FTP()
-	  ftp.connect(sServer, sPort)
-	  ftp.login(sUser, sPassw)
-	  ftp.quit()
-	  self.saveExecuteResult(info)
-	except Exception as e:
-	  self.saveExecuteResult(info, self.sErrorFlag, e)
+            ftp = FTP()
+            ftp.connect(sServer, sPort)
+            ftp.login(sUser, sPassw)
+            ftp.quit()
+            self.saveExecuteResult(info)
+        except Exception as e:
+            self.saveExecuteResult(info, self.sErrorFlag, e)
 
 
     def saveExecuteResult(self, info, status="ok", error=""):
@@ -73,9 +73,9 @@ class Services:
         sResultDebug = self.oHelpers.printOutput(info, status, error)
         sResultText = self.oHelpers.printOutput(info, status, error, 'text')
         if status == 'ok':
-	  self.listDebugResultOk.append(sResultDebug)
-	  self.listTextResultOk.append(sResultText)
+            self.listDebugResultOk.append(sResultDebug)
+            self.listTextResultOk.append(sResultText)
         elif status == self.sErrorFlag:
-	  self.listDebugResultError.append(sResultDebug)
-	  self.listTextResultError.append(sResultText)
+            self.listDebugResultError.append(sResultDebug)
+            self.listTextResultError.append(sResultText)
         
