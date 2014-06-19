@@ -1,3 +1,5 @@
+#! /usr/bin/env python
+
 # -*- coding: utf-8 -*-
 from classes.main import Main
 from sys import argv
